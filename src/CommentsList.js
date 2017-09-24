@@ -197,9 +197,10 @@ class CommentsList extends Component {
   renderComment(comment) {
     return (
       <li key={comment.id}>
-        <ControlLabel>
-          {comment.body}, Author: {comment.author}, Vote Score: {comment.voteScore}, Created on: {new Date(comment.timestamp).toUTCString()}
-        </ControlLabel>
+        <b> Comment: </b>{comment.body},
+        <b> Author: </b>{comment.author}
+        <b> Votes: </b>{comment.voteScore}
+        <b> Created: </b>{new Date(comment.timestamp).toUTCString()}
         <FormGroup>
           <ReadableControls type="comment" id={comment.id} onUpVote={this.onUpVote} onDownVote={this.onDownVote} onEdit={this.onEdit} onDelete={this.onDelete} />
         </FormGroup>

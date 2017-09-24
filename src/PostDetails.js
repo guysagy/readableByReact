@@ -113,7 +113,7 @@ class PostDetails extends Component {
           <p>Author: {this.props.postDetails.author}</p>
           <p>Category: {this.props.postDetails.category}</p>
           <p>Votes: {this.props.postDetails.voteScore}</p>
-          <p>Creation: {new Date(this.props.postDetails.timestamp).toUTCString()}</p>
+          <p>Created: {new Date(this.props.postDetails.timestamp).toUTCString()}</p>
           <div className="well">
             <p>Comments:</p>
             <CommentsListWithRedux postId={this.props.match.params.postId} parentPost={this.props.postDetails} />

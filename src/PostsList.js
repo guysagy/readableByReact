@@ -222,11 +222,12 @@ class PostsList extends Component {
 
   renderPost(post) {
     return (<li key={post.id}>
-              <ControlLabel>
-                <Link to={`/post/${post.id}`}>Title: {post.title}</Link>&nbsp;
-                <span>Author: {post.author}, Votes: {post.voteScore}, Created: {new Date(post.timestamp).toUTCString()}, Category: {post.category}</span>
-              </ControlLabel>
               <FormGroup>
+                <Link to={`/post/${post.id}`}>Title: {post.title}</Link>
+                <span><b> Author: </b></span>{post.author}
+                <span><b> Votes: </b></span>{post.voteScore}
+                <span><b> Created: </b></span>{new Date(post.timestamp).toUTCString()}
+                <span><b> Category: </b></span>{post.category}
                 <ReadableControls
                   id={post.id}
                   onUpVote={this.onUpVote}
@@ -242,7 +243,7 @@ class PostsList extends Component {
       <div className="jumbotron">
         <h2>Posts</h2>
         <div className="well">
-          <h3>Read</h3>
+          <h3>Read ({this.props.posts.filter((post)=>(post.deleted === false)).length} posts)</h3>
           <form>
             <FormGroup controlId="selectPostsOrderBy">
               <Select name="selectPostsOrderBy"
