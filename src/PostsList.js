@@ -223,11 +223,11 @@ class PostsList extends Component {
   renderPost(post) {
     return (<li key={post.id}>
               <FormGroup>
-                <Link to={`/post/${post.id}`}>Title: {post.title}</Link>
-                <span><b> Author: </b></span>{post.author}
-                <span><b> Votes: </b></span>{post.voteScore}
-                <span><b> Created: </b></span>{new Date(post.timestamp).toUTCString()}
-                <span><b> Category: </b></span>{post.category}
+                <b> Title: </b><Link to={`/post/${post.id}`}>{post.title}</Link>
+                <b> Author: </b>{post.author}
+                <b> Votes: </b>{post.voteScore}
+                <b> Created: </b>{new Date(post.timestamp).toUTCString()}
+                <b> Category: </b>{post.category}
                 <ReadableControls
                   id={post.id}
                   onUpVote={this.onUpVote}
