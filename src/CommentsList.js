@@ -210,7 +210,7 @@ class CommentsList extends Component {
     return (
       <div>
         <div className="well">
-          <h3>Read</h3>
+          <h3>Read ({this.props.comments.filter((comment)=>(comment.deleted===false)).length} comments)</h3>
           <FormGroup>
             <Select name="selectCommentsOrderBy"
               value={this.props.commentsOrderByValue}
