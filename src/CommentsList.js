@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { FormGroup, ControlLabel, FormControl, ButtonToolbar, Button } from 'react-bootstrap'
+import { FormGroup, FormControl, ButtonToolbar, Button } from 'react-bootstrap'
 import ReactModal from 'react-modal'
 import serializeForm from 'form-serialize'
 import uuidv1 from 'uuid/v1'

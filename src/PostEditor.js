@@ -26,7 +26,6 @@ class PostEditor extends Component {
 
   handleChange(event) {
     event.preventDefault();
-    console.log("handling form change event");
   }
 
   render() {
