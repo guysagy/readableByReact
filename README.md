@@ -28,3 +28,13 @@ Posts page displays a list of all available Posts' title and Posts' metadata, li
 
 ### Posts Details Page
 Post details page shows full information for the post, including available comments to the post, and a form to create a new comment to this post.
+
+## Known bugs:
+(i) New Post and New Comment forms' reset() does not reset the Options input [probably because once a selection is made, the instructions option disappears]. <br/>
+
+## Resources - technical articles referenced while implementing this project:
+(i) [re boostrap](https://react-bootstrap.github.io/components.html#forms)<br/>
+(ii) [passing values in route 1](https://stackoverflow.com/questions/27864720/react-router-pass-props-to-handler-component)<br/>
+(iii) [passing values in route 2](https://jaketrent.com/post/access-route-params-react-router-v4/)<br/>
+(iv) [Deep cloning an object](https://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-deep-clone-an-object-in-javascript)<br/>
+(v) [JavaScript ES6 syntax in Sublime](http://gunnariauvinen.com/getting-es6-syntax-highlighting-in-sublime-text/)<br/>
