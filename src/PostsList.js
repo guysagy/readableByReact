@@ -27,10 +27,10 @@ class PostsList extends Component {
     this.onUpVote = this.onUpVote.bind(this);
     this.onDownVote = this.onDownVote.bind(this);
     this.onEdit = this.onEdit.bind(this);
-    this.submitNewPost = this.submitNewPost.bind(this);
+    this.onSubmitNewPost = this.onSubmitNewPost.bind(this);
+    this.onSubmitEditedPost = this.onSubmitEditedPost.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
-    this.onSubmitEditedPost = this.onSubmitEditedPost.bind(this);
     this.getTitleById = this.getTitleById.bind(this);
     this.getBodyById = this.getBodyById.bind(this);
   }
@@ -47,7 +47,7 @@ class PostsList extends Component {
     this.props.boundPostsOrderByValue('voteScore');
   }
 
-  submitNewPost(event) {
+  onSubmitNewPost(event) {
     event.preventDefault();
     const values = serializeForm(event.target, {hash:true});
     if (values.postTitle && values.postBody && values.selectCategoryForPost) {
@@ -59,10 +59,7 @@ class PostsList extends Component {
       .then((result) => {
         postCreateForm.reset();
         if (this.props.category === undefined || this.props.category === values.selectCategoryForPost) {
-          // Deep cloning an object per :
-          // https://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-deep-clone-an-object-in-javascript
-          const posts = JSON.parse(JSON.stringify(this.props.posts));
-          posts.push(result);
+          const posts = [...this.props.posts, result];
           this.props.boundPosts(posts);
         }
       });
@@ -75,7 +72,7 @@ class PostsList extends Component {
     if (this.props.idForEditPost !== null && values.title && values.body) {
       readablesAPI.updatePost(this.props.idForEditPost, values.title, values.body)
       .then((result) => {
-        const posts = JSON.parse(JSON.stringify(this.props.posts));
+        const posts = [...this.props.posts];
         for (let i = 0 ; i < posts.length ; i++) {
           if (posts[i].id === this.props.idForEditPost) {
             posts[i] = result;
@@ -91,7 +88,7 @@ class PostsList extends Component {
   onUpVote(postId) {
     readablesAPI.upVotePost(postId)
     .then((result) => {
-      const posts = JSON.parse(JSON.stringify(this.props.posts));
+      const posts = [...this.props.posts];
       for (let i = 0 ; i < posts.length ; i++) {
         if (posts[i].id === postId) {
           posts[i].voteScore = result.voteScore;
@@ -105,7 +102,7 @@ class PostsList extends Component {
   onDownVote(postId) {
     readablesAPI.downVotePost(postId)
     .then((result) => {
-      const posts = JSON.parse(JSON.stringify(this.props.posts));
+      const posts = [...this.props.posts];
       for (let i = 0 ; i < posts.length ; i++) {
         if (posts[i].id === postId) {
           posts[i].voteScore = result.voteScore;
@@ -119,7 +116,7 @@ class PostsList extends Component {
   onDelete(postId) {
     readablesAPI.deletePost(postId)
     .then((result) => {
-      const posts = JSON.parse(JSON.stringify(this.props.posts));
+      const posts = [...this.props.posts];
       for (let i = 0 ; i < posts.length ; i++) {
         if (posts[i].id === postId) {
           posts[i].deleted = result.deleted;
@@ -228,6 +225,8 @@ class PostsList extends Component {
                 <b> Votes: </b>{post.voteScore}
                 <b> Created: </b>{new Date(post.timestamp).toUTCString()}
                 <b> Category: </b>{post.category}
+              </FormGroup>
+              <FormGroup>
                 <ReadableControls
                   id={post.id}
                   onUpVote={this.onUpVote}
@@ -241,7 +240,7 @@ class PostsList extends Component {
   render() {
     return (
       <div className="jumbotron">
-        <h2>Posts</h2>
+        <h2>Posts { this.props.category && `for Category '${this.props.category}'` }</h2>
         <div className="well">
           <h3>Read ({this.props.posts.filter((post)=>(post.deleted === false)).length} posts)</h3>
           <form>
@@ -270,7 +269,7 @@ class PostsList extends Component {
         </div>
         <div className="well">
           <h3>Create</h3>
-          <form onSubmit={this.submitNewPost}>
+          <form onSubmit={this.onSubmitNewPost}>
             <FormGroup controlId="formControlsPostCategory">
               <ControlLabel>New post category:</ControlLabel>
               <Select name="selectCategoryForPost"

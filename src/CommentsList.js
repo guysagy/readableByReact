@@ -37,10 +37,10 @@ class CommentsList extends Component {
     this.onUpVote = this.onUpVote.bind(this);
     this.onDownVote = this.onDownVote.bind(this);
     this.onEdit = this.onEdit.bind(this);
-    this.submitNewComment = this.submitNewComment.bind(this);
+    this.onSubmitNewComment = this.onSubmitNewComment.bind(this);
+    this.onSubmitEditedComment = this.onSubmitEditedComment.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
-    this.onSubmitEditedComment = this.onSubmitEditedComment.bind(this);
   }
 
   componentDidMount() {
@@ -48,7 +48,7 @@ class CommentsList extends Component {
     this.props.boundCommentsOrderByValue('voteScore')
   }
 
-  submitNewComment(event) {
+  onSubmitNewComment(event) {
     event.preventDefault();
     if (this.props.parentPost.deleted===true){
       return;
@@ -62,8 +62,7 @@ class CommentsList extends Component {
       readablesAPI.addComment(id, timestamp, values.commentBody, author, this.props.postId)
       .then((result) => {
         commentCreateForm.reset();
-        const newComments = JSON.parse(JSON.stringify(this.props.comments));
-        newComments.push(result);
+        const newComments = [...this.props.comments, result];
         this.props.boundComments(newComments);
       });
     }
@@ -78,7 +77,7 @@ class CommentsList extends Component {
     if (this.props.commentToEdit && values.body) {
       readablesAPI.updateComment(this.props.commentToEdit.id, Date.now(), values.body)
       .then((result) => {
-        const newComments = JSON.parse(JSON.stringify(this.props.comments));
+        const newComments = [...this.props.comments];
         for (let i = 0 ; i < newComments.length ; i++) {
           if (newComments[i].id === this.props.commentToEdit.id) {
             newComments[i].body = result.body;
@@ -97,7 +96,7 @@ class CommentsList extends Component {
     }
     readablesAPI.upVoteComment(commentId)
     .then((result) => {
-      const newComments = JSON.parse(JSON.stringify(this.props.comments));
+      const newComments = [...this.props.comments];
       for (let i = 0 ; i < newComments.length ; i++) {
         if (newComments[i].id === commentId) {
           newComments[i].voteScore = result.voteScore;
@@ -114,7 +113,7 @@ class CommentsList extends Component {
     }
     readablesAPI.downVoteComment(commentId)
     .then((result) => {
-      const newComments = JSON.parse(JSON.stringify(this.props.comments));
+      const newComments = [...this.props.comments];
       for (let i = 0 ; i < newComments.length ; i++) {
         if (newComments[i].id === commentId) {
           newComments[i].voteScore = result.voteScore;
@@ -131,7 +130,7 @@ class CommentsList extends Component {
     }
     readablesAPI.deleteComment(commentId)
     .then((result) => {
-      const newComments = JSON.parse(JSON.stringify(this.props.comments));
+      const newComments = [...this.props.comments];
       for (let i = 0 ; i < newComments.length ; i++) {
         if (newComments[i].id === commentId) {
           newComments[i].deleted = result.deleted;
@@ -197,10 +196,12 @@ class CommentsList extends Component {
   renderComment(comment) {
     return (
       <li key={comment.id}>
-        <b> Comment: </b>{comment.body},
-        <b> Author: </b>{comment.author}
-        <b> Votes: </b>{comment.voteScore}
-        <b> Created: </b>{new Date(comment.timestamp).toUTCString()}
+        <FormGroup>
+          <b> Comment: </b>{comment.body},
+          <b> Author: </b>{comment.author}
+          <b> Votes: </b>{comment.voteScore}
+          <b> Created: </b>{new Date(comment.timestamp).toUTCString()}
+        </FormGroup>
         <FormGroup>
           <ReadableControls type="comment" id={comment.id} onUpVote={this.onUpVote} onDownVote={this.onDownVote} onEdit={this.onEdit} onDelete={this.onDelete} />
         </FormGroup>
@@ -234,7 +235,7 @@ class CommentsList extends Component {
         </div>
         <div className="well">
           <h3>Create</h3>
-          <form onSubmit={this.submitNewComment}>
+          <form onSubmit={this.onSubmitNewComment}>
             <FormGroup controlId="formControlsCreateCommentBody">
               <FormControl componentClass="textarea" name="commentBody" placeholder="Enter a new comment here" cols="80" rows="4"/>
             </FormGroup>

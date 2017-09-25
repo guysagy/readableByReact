@@ -29,64 +29,40 @@ const initialReadablesState = {
 
 let reducer = (state = initialReadablesState, action) => {
 
-  let newState = {};
-
   switch (action.type) {
 
     case STASH_POSTS :
-      Object.assign(newState, state);
-      newState.posts = action.posts;
-      return newState;
+      return { ...state, posts : action.posts };
 
     case STASH_CATEGORIES :
-      Object.assign(newState, state);
-      newState.categories = action.categories;
-      return newState;
+      return { ...state, categories : action.categories };
 
     case STASH_NEW_POST_CATEGORIES :
-      Object.assign(newState, state);
-      newState.newPostCategories = action.newPostCategories;
-      return newState;
+      return { ...state, newPostCategories : action.newPostCategories };
 
     case STASH_POSTS_ORDER_BY_VALUE :
-      Object.assign(newState, state);
-      newState.postsOrderByValue = action.postsOrderByValue;
-      return newState;
+      return { ...state, postsOrderByValue : action.postsOrderByValue };
 
     case STASH_CATEGORY_FOR_NEW_POST :
-      Object.assign(newState, state);
-      newState.categoryForNewPost = action.categoryForNewPost;
-      return newState;
+      return { ...state, categoryForNewPost : action.categoryForNewPost };
 
     case STASH_ID_FOR_EDIT_POST :
-      Object.assign(newState, state);
-      newState.idForEditPost = action.idForEditPost;
-      return newState;
+      return { ...state, idForEditPost : action.idForEditPost };
 
     case STASH_COMMENTS :
-      Object.assign(newState, state);
-      newState.comments = action.comments;
-      return newState;
+      return { ...state, comments : action.comments };
 
     case STASH_COMMENTS_ORDER_BY_VALUE :
-      Object.assign(newState, state);
-      newState.commentsOrderByValue = action.commentsOrderByValue;
-      return newState;
+      return { ...state, commentsOrderByValue : action.commentsOrderByValue };
 
     case STASH_COMMENT_TO_EDIT :
-      Object.assign(newState, state);
-      newState.commentToEdit = action.commentToEdit;
-      return newState;
+      return { ...state, commentToEdit : action.commentToEdit };
 
     case STASH_POST_DETAILS :
-      Object.assign(newState, state);
-      newState.postDetails = action.postDetails;
-      return newState;
+      return { ...state, postDetails : action.postDetails };
 
     case STASH_POST_DETAILS_EDIT :
-      Object.assign(newState, state);
-      newState.postDetailsEdit = action.postDetailsEdit;
-      return newState;
+      return { ...state, postDetailsEdit : action.postDetailsEdit };
 
     default :
       return state;
