@@ -30,7 +30,7 @@ Posts page displays a list of all available Posts' title and Posts' metadata, li
 Post details page shows full information for the post, including available comments to the post, and a form to create a new comment to this post.
 
 ## Known bugs:
-(i) New Post and New Comment forms' reset() does not reset the Options input [probably because once a selection is made, the instructions option disappears]. <br/>
+(i) Forms' input validations are missing. <br/>
 (ii) Efficiency issue: Both Posts and Category pages load categories from server, independently. <br/>
 (iii) Efficiency issue: 'Posts for Category' loads relevant posts from server, while it could simply filter posts from the complete list of posts. <br/>
 
