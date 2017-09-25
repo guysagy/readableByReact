@@ -58,6 +58,7 @@ class PostsList extends Component {
       readablesAPI.addPost(id, timestamp, values.postTitle, values.postBody, author, values.selectCategoryForPost)
       .then((result) => {
         postCreateForm.reset();
+        this.props.boundCategoryForNewPost("");
         if (this.props.category === undefined || this.props.category === values.selectCategoryForPost) {
           const posts = [...this.props.posts, result];
           this.props.boundPosts(posts);
@@ -148,7 +149,7 @@ class PostsList extends Component {
       for (var i = 0 ; i < categories.length ; ++i) {
         newPostCategories.push({value: categories[i].name, label: categories[i].name});
       }
-      this.props.boundNewPostCatories(newPostCategories);
+      this.props.boundNewPostCategories(newPostCategories);
     })
     .catch(function(error) {
       console.log("error: " + error);
@@ -273,7 +274,7 @@ class PostsList extends Component {
             <FormGroup controlId="formControlsPostCategory">
               <ControlLabel>New post category:</ControlLabel>
               <Select name="selectCategoryForPost"
-                placeholder="Select a Category for new post"
+                placeholder="Select a category for the new post"
                 value={this.props.categoryForNewPost}
                 options={this.props.newPostCategories}
                 onChange={this.onNewPostCategoryChange}
@@ -286,14 +287,14 @@ class PostsList extends Component {
               <FormControl
                 componentClass="input"
                 name="postTitle"
-                placeholder="Enter new post title" />
+                placeholder="Enter a new post title here" />
             </FormGroup>
             <FormGroup controlId="formControlsPostBody">
               <ControlLabel>New post body:</ControlLabel>
               <FormControl
                 componentClass="textarea"
                 name="postBody"
-                placeholder="Enter new post body"
+                placeholder="Enter a new post body here"
                 cols="80" rows="4" />
             </FormGroup>
             <Button type="submit" bsStyle="primary">Publish New Post</Button>
@@ -323,7 +324,7 @@ let mapStateToProps = state => ({
 let mapDispatchToProps = dispatch => ({
   boundPosts: (posts) => dispatch(stashPosts(posts)),
   boundCategories: (categories) => dispatch(stashCategories(categories)),
-  boundNewPostCatories: (newPostCategories) => dispatch(stashNewPostCategories(newPostCategories)),
+  boundNewPostCategories: (newPostCategories) => dispatch(stashNewPostCategories(newPostCategories)),
   boundPostsOrderByValue: (postsOrderByValue) => dispatch(stashPostsOrderByValue(postsOrderByValue)),
   boundCategoryForNewPost: (categoryForNewPost) => dispatch(stashCategoryForNewPost(categoryForNewPost)),
   boundIdForEditPost: (idForEditPost) => dispatch(stashIdForEditPost(idForEditPost))
