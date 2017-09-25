@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { FormGroup } from 'react-bootstrap'
 import serializeForm from 'form-serialize'
 import * as readablesAPI from './readablesAPI'
 import CommentsListWithRedux from './CommentsList'
@@ -101,14 +102,14 @@ class PostDetails extends Component {
               && `This post has been deleted and is no longer viewable after this page closes!`}
           </h1>
           <h2>Post Title: {this.props.postDetails.title}</h2>
-          <p>
+          <FormGroup>
             <ReadableControls
               id={this.props.postDetails.id}
               onUpVote={this.onUpVote}
               onDownVote={this.onDownVote}
               onDelete={this.onDelete}
               onEdit={this.onEdit} />
-          </p>
+          </FormGroup>
           <p>Body: {this.props.postDetails.body}</p>
           <p>Author: {this.props.postDetails.author}</p>
           <p>Category: {this.props.postDetails.category}</p>
