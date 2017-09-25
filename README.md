@@ -35,8 +35,8 @@ Post details page shows full information for the post, including available comme
 (iii) Efficiency issue: 'Posts for Category' loads relevant posts from server, while it could simply filter posts from the complete list of posts. <br/>
 
 ## Resources - technical articles referenced while implementing this project:
-(i) [re boostrap](https://react-bootstrap.github.io/components.html#forms)<br/>
-(ii) [passing values in route 1](https://stackoverflow.com/questions/27864720/react-router-pass-props-to-handler-component)<br/>
-(iii) [passing values in route 2](https://jaketrent.com/post/access-route-params-react-router-v4/)<br/>
+(i) [React-Boostrap](https://react-bootstrap.github.io/components.html#forms)<br/>
+(ii) [Passing values in route (1)](https://stackoverflow.com/questions/27864720/react-router-pass-props-to-handler-component)<br/>
+(iii) [Passing values in route (2)](https://jaketrent.com/post/access-route-params-react-router-v4/)<br/>
 (iv) [Deep cloning an object](https://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-deep-clone-an-object-in-javascript)<br/>
 (v) [JavaScript ES6 syntax in Sublime](http://gunnariauvinen.com/getting-es6-syntax-highlighting-in-sublime-text/)<br/>
