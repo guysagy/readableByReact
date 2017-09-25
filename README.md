@@ -31,6 +31,8 @@ Post details page shows full information for the post, including available comme
 
 ## Known bugs:
 (i) New Post and New Comment forms' reset() does not reset the Options input [probably because once a selection is made, the instructions option disappears]. <br/>
+(ii) Efficiency issue: Both Posts and Category pages load categories from server, independently. <br/>
+(iii) Efficiency issue: 'Posts for Category' loads relevant posts from server, while it could simply filter posts from the complete list of posts. <br/>
 
 ## Resources - technical articles referenced while implementing this project:
 (i) [re boostrap](https://react-bootstrap.github.io/components.html#forms)<br/>
