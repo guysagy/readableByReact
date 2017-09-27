@@ -7,10 +7,17 @@ This README includes instructions for installing, launching and using the applic
 Submitted by Guy Sagy (guysagy@hotamil.com), September 2017. <br/>
 
 ## WebApp Installation & Launch Guide
-As a pre-condition to run this application on a server machine, [Node.js](https://nodejs.org/) must be installed - please install Node.js if needed. After having Node.js installed, check out the [project code](https://github.com/guysagy/readableByReact). Then: <br/>
-(i) in a command prompt, change directory into the project's check out directory, <br/>
-(ii) run the command "npm install", and then <br/>
-(iii) run the command "npm start". <br/>
+(1) As a pre-condition to run this application on a server machine, [Node.js](https://nodejs.org/) must be installed. Please install [Node.js](https://nodejs.org/) if needed.
+
+(2.a) Check out the [Readable REST API server](https://github.com/udacity/reactnd-project-readable-starter). <br/>
+(2.b) In a command prompt change directory into the <checkout-dir>/api-server dir. <br/>
+(2.c) Run the command "npm install". This will install project dependencies. <br/>
+(2.d) Run the command "npm start". This will run the REST API HTTP server. <br/>
+
+(3.a) Check out the [Readable web-app client-side code](https://github.com/guysagy/readableByReact). <br/>
+(3.b) In a command prompt, change directory into the project's check out directory. <br/>
+(3.c) Run the command "npm install". This will install project dependencies. <br/>
+(3.d) Run the command "npm start". This will run the client-app HTTP server. <br/>
 
 This is sufficient to get the web server and application installed, running and launched in the hosting machine's default browser. <br/>
 
