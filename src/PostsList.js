@@ -160,6 +160,7 @@ class PostsList extends Component {
     readablesAPI.getAllPosts()
     .then((posts) => {
       this.props.boundPosts(posts);
+      this.props.posts.forEach((post) => this.loadPostCommentsCount(post));
     })
     .catch(function(error) {
       console.log(error);
@@ -170,6 +171,24 @@ class PostsList extends Component {
     readablesAPI.getPostsForCategory(this.props.category)
     .then((posts) => {
       this.props.boundPosts(posts);
+      this.props.posts.forEach((post) => this.loadPostCommentsCount(post));
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+  }
+
+  loadPostCommentsCount(post) {
+    readablesAPI.getCommentsForPost(post.id)
+    .then((comments) => {
+      let newPosts = [...this.props.posts];
+      for(let i = 0 ; i < newPosts.length ; ++i){
+        if (newPosts[i].id === post.id) {
+          newPosts[i].commentsCount = comments.length;
+          break;
+        }
+      }
+      this.props.boundPosts(newPosts);
     })
     .catch(function(error) {
       console.log(error);
@@ -226,6 +245,7 @@ class PostsList extends Component {
                 <b> Votes: </b>{post.voteScore}
                 <b> Created: </b>{new Date(post.timestamp).toUTCString()}
                 <b> Category: </b>{post.category}
+                <b> Comments Count: </b>{typeof post.commentsCount === "number" ? post.commentsCount : "Loading..."}
               </FormGroup>
               <FormGroup>
                 <ReadableControls
