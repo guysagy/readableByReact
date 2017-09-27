@@ -16,6 +16,7 @@ class PostDetails extends Component {
 
   constructor(props) {
     super(props);
+    this.renderPostDetails = this.renderPostDetails.bind(this);
     this.onDelete = this.onDelete.bind(this);
     this.onUpVote = this.onUpVote.bind(this);
     this.onDownVote = this.onDownVote.bind(this);
@@ -93,38 +94,43 @@ class PostDetails extends Component {
     });
   }
 
+  renderPostDetails() {
+    return (
+      <div>
+        <h2>Post Title: {this.props.postDetails.title}</h2>
+        <FormGroup>
+          <ReadableControls
+            id={this.props.postDetails.id}
+            onUpVote={this.onUpVote}
+            onDownVote={this.onDownVote}
+            onDelete={this.onDelete}
+            onEdit={this.onEdit} />
+        </FormGroup>
+        <p>Body: {this.props.postDetails.body}</p>
+        <p>Author: {this.props.postDetails.author}</p>
+        <p>Category: {this.props.postDetails.category}</p>
+        <p>Votes: {this.props.postDetails.voteScore}</p>
+        <p>Created: {new Date(this.props.postDetails.timestamp).toUTCString()}</p>
+        <div className="well">
+          <p>Comments:</p>
+          <CommentsListWithRedux postId={this.props.match.params.postId} parentPost={this.props.postDetails} />
+        </div>
+        <PostEditor
+          isOpen={this.props.postDetailsEdit}
+          onSubmit={this.onSubmitEditedPost}
+          title={this.props.postDetails.title}
+          body={this.props.postDetails.body}
+          onClose={this.handleCloseModal} />
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
          <div className="jumbotron">
-          <h1>
-            {this.props.postDetails.deleted === true
-              && `This post has been deleted and is no longer viewable after this page closes!`}
-          </h1>
-          <h2>Post Title: {this.props.postDetails.title}</h2>
-          <FormGroup>
-            <ReadableControls
-              id={this.props.postDetails.id}
-              onUpVote={this.onUpVote}
-              onDownVote={this.onDownVote}
-              onDelete={this.onDelete}
-              onEdit={this.onEdit} />
-          </FormGroup>
-          <p>Body: {this.props.postDetails.body}</p>
-          <p>Author: {this.props.postDetails.author}</p>
-          <p>Category: {this.props.postDetails.category}</p>
-          <p>Votes: {this.props.postDetails.voteScore}</p>
-          <p>Created: {new Date(this.props.postDetails.timestamp).toUTCString()}</p>
-          <div className="well">
-            <p>Comments:</p>
-            <CommentsListWithRedux postId={this.props.match.params.postId} parentPost={this.props.postDetails} />
-          </div>
-          <PostEditor
-            isOpen={this.props.postDetailsEdit}
-            onSubmit={this.onSubmitEditedPost}
-            title={this.props.postDetails.title}
-            body={this.props.postDetails.body}
-            onClose={this.handleCloseModal} />
+          <h2>{this.props.postDetails.id === undefined && `The requested post does not exist or has been deleted and is no longer viewable!`}</h2>
+          {this.props.postDetails.id && this.renderPostDetails()}
         </div>
       </div>
     );
