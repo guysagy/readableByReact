@@ -7,12 +7,12 @@ This README includes instructions for installing, launching and using the applic
 Submitted by Guy Sagy (guysagy@hotamil.com), September 2017. <br/>
 
 ## WebApp Installation & Launch Guide
-(1) As a pre-condition to run this application on a server machine, [Node.js](https://nodejs.org/) must be installed. Please install [Node.js](https://nodejs.org/) if needed.
+(1) As a pre-condition to run this application on a server machine, [Node.js](https://nodejs.org/) must be installed. Please install [Node.js](https://nodejs.org/) if it is not yet installed.
 
 (2.a) Check out the [Readable REST API server](https://github.com/udacity/reactnd-project-readable-starter). <br/>
-(2.b) In a command prompt change directory into the <checkout-dir>/api-server dir. <br/>
+(2.b) In a command prompt change directory into the project-checkout-dir/api-server dir. <br/>
 (2.c) Run the command "npm install". This will install project dependencies. <br/>
-(2.d) Run the command "npm start". This will run the REST API HTTP server. <br/>
+(2.d) Run the command "node server". This will run the REST API HTTP server. <br/>
 
 (3.a) Check out the [Readable web-app client-side code](https://github.com/guysagy/readableByReact). <br/>
 (3.b) In a command prompt, change directory into the project's check out directory. <br/>
@@ -47,3 +47,4 @@ Post details page shows full information for the post, including available comme
 (iii) [Passing values in route (2)](https://jaketrent.com/post/access-route-params-react-router-v4/)<br/>
 (iv) [Deep cloning an object](https://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-deep-clone-an-object-in-javascript)<br/>
 (v) [JavaScript ES6 syntax in Sublime](http://gunnariauvinen.com/getting-es6-syntax-highlighting-in-sublime-text/)<br/>
+(vi) [Object Spread Operator](http://redux.js.org/docs/recipes/UsingObjectSpreadOperator.html)<br/>
