@@ -83,6 +83,7 @@ class PostsList extends Component {
         }
         this.props.boundPosts(posts);
         this.props.boundIdForEditPost(null);
+        this.loadPostCommentsCount(result);
       });
     }
   }
