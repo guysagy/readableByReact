@@ -59,6 +59,7 @@ class PostsList extends Component {
       .then((result) => {
         postCreateForm.reset();
         this.props.boundCategoryForNewPost("");
+        result.commentsCount = 0;
         if (this.props.category === undefined || this.props.category === values.selectCategoryForPost) {
           const posts = [...this.props.posts, result];
           this.props.boundPosts(posts);
