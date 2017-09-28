@@ -10,7 +10,7 @@ Submitted by Guy Sagy (guysagy@hotamil.com), September 2017. <br/>
 (1) As a pre-condition to run this application on a server machine, [Node.js](https://nodejs.org/) must be installed. Please install [Node.js](https://nodejs.org/) if it is not yet installed.
 
 (2.a) Check out the [Readable REST API server](https://github.com/udacity/reactnd-project-readable-starter). <br/>
-(2.b) In a command prompt change directory into the project-checkout-dir/api-server dir. <br/>
+(2.b) In a command prompt change directory into the &lt;project-checkout-dir&gt;/api-server dir. <br/>
 (2.c) Run the command "npm install". This will install project dependencies. <br/>
 (2.d) Run the command "node server". This will run the REST API HTTP server. <br/>
 
