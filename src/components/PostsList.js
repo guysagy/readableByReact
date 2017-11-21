@@ -6,10 +6,10 @@ import uuidv1 from 'uuid/v1'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 import serializeForm from 'form-serialize'
-import * as readablesAPI from './readablesAPI'
+import * as readablesAPI from '../readablesAPI'
 import ReadableControls from './ReadableControls'
 import PostEditor from './PostEditor'
-import { stashIdForEditPost, stashCategoryForNewPost, stashPostsOrderByValue, stashNewPostCategories, stashCategories, stashPosts } from './actions'
+import { stashIdForEditPost, stashCategoryForNewPost, stashPostsOrderByValue, stashNewPostCategories, stashCategories, stashPosts } from '../actions'
 
 /*
 PostsListWithRedux component implementation.

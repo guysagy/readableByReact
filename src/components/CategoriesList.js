@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { stashCategories } from './actions'
-import * as readablesAPI from './readablesAPI'
+import { stashCategories } from '../actions'
+import * as readablesAPI from '../readablesAPI'
 
 /*
 CategoriesListWithRedux component implementation.

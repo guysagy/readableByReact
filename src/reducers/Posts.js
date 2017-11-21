@@ -13,21 +13,21 @@ import {
   STASH_POST_DETAILS_EDIT
 } from '../actions'
 
-const initialReadablesState = {
+const initialPostsState = {
   posts:[],
-  categories:[],
+  //categories:[],
   newPostCategories:[],
   postsOrderByValue: '',
   categoryForNewPost: '',
   idForEditPost: null,
-  comments: [],
-  commentsOrderByValue : '',
-  editComment: null,
+  //comments: [],
+  //commentsOrderByValue : '',
+  //editComment: null,
   postDetails: {},
   editPostDetails: false
 }
 
-let reducer = (state = initialReadablesState, action) => {
+let postsReducer = (state = initialPostsState, action) => {
 
   switch (action.type) {
 
@@ -53,24 +53,10 @@ let reducer = (state = initialReadablesState, action) => {
     case STASH_POST_DETAILS_EDIT :
       return { ...state, postDetailsEdit : action.postDetailsEdit };
 
-    // Categories reducer.
-    case STASH_CATEGORIES :
-      return { ...state, categories : action.categories };
-
-    // Categories
-    case STASH_COMMENTS :
-      return { ...state, comments : action.comments };
-
-    case STASH_COMMENTS_ORDER_BY_VALUE :
-      return { ...state, commentsOrderByValue : action.commentsOrderByValue };
-
-    case STASH_COMMENT_TO_EDIT :
-      return { ...state, commentToEdit : action.commentToEdit };
-
     default :
       return state;
   }
 
 }
 
-export default reducer
+export default postsReducer

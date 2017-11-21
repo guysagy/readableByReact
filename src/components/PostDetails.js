@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { FormGroup } from 'react-bootstrap'
 import serializeForm from 'form-serialize'
-import * as readablesAPI from './readablesAPI'
+import * as readablesAPI from '../readablesAPI'
 import CommentsListWithRedux from './CommentsList'
 import PostEditor from './PostEditor'
 import ReadableControls from './ReadableControls'
-import { stashPostDetails, stashPostDetailsEdit } from './actions'
+import { stashPostDetails, stashPostDetailsEdit } from '../actions'
 
 /*
 PostDetailsWithRedux component implementation.
