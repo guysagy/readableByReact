@@ -36,11 +36,11 @@ class PostsList extends Component {
   }
 
   componentDidMount() {
-    if (this.props.category === undefined) {
+    if (this.props.posts.category === undefined) {
       this.props.boundCategoryForNewPost(null)
       this.loadPosts();
     } else {
-      this.props.boundCategoryForNewPost(this.props.category)
+      this.props.boundCategoryForNewPost(this.props.posts.category)
       this.loadPostsForCategory();
     }
     this.loadCategories();
@@ -60,8 +60,8 @@ class PostsList extends Component {
         postCreateForm.reset();
         this.props.boundCategoryForNewPost("");
         result.commentsCount = 0;
-        if (this.props.category === undefined || this.props.category === values.selectCategoryForPost) {
-          const posts = [...this.props.posts, result];
+        if (this.props.posts.category === undefined || this.props.posts.category === values.selectCategoryForPost) {
+          const posts = [...this.props.posts.posts, result];
           this.props.boundPosts(posts);
         }
       });
@@ -71,12 +71,12 @@ class PostsList extends Component {
   onSubmitEditedPost(event) {
     event.preventDefault();
     const values = serializeForm(event.target, {hash:true});
-    if (this.props.idForEditPost !== null && values.title && values.body) {
-      readablesAPI.updatePost(this.props.idForEditPost, values.title, values.body)
+    if (this.props.posts.idForEditPost !== null && values.title && values.body) {
+      readablesAPI.updatePost(this.props.posts.idForEditPost, values.title, values.body)
       .then((result) => {
-        const posts = [...this.props.posts];
+        const posts = [...this.props.posts.posts];
         for (let i = 0 ; i < posts.length ; i++) {
-          if (posts[i].id === this.props.idForEditPost) {
+          if (posts[i].id === this.props.posts.idForEditPost) {
             posts[i] = result;
             break;
           }
@@ -91,7 +91,7 @@ class PostsList extends Component {
   onUpVote(postId) {
     readablesAPI.upVotePost(postId)
     .then((result) => {
-      const posts = [...this.props.posts];
+      const posts = [...this.props.posts.posts];
       for (let i = 0 ; i < posts.length ; i++) {
         if (posts[i].id === postId) {
           posts[i].voteScore = result.voteScore;
@@ -105,7 +105,7 @@ class PostsList extends Component {
   onDownVote(postId) {
     readablesAPI.downVotePost(postId)
     .then((result) => {
-      const posts = [...this.props.posts];
+      const posts = [...this.props.posts.posts];
       for (let i = 0 ; i < posts.length ; i++) {
         if (posts[i].id === postId) {
           posts[i].voteScore = result.voteScore;
@@ -119,7 +119,7 @@ class PostsList extends Component {
   onDelete(postId) {
     readablesAPI.deletePost(postId)
     .then((result) => {
-      const posts = [...this.props.posts];
+      const posts = [...this.props.posts.posts];
       for (let i = 0 ; i < posts.length ; i++) {
         if (posts[i].id === postId) {
           posts[i].deleted = result.deleted;
@@ -162,7 +162,7 @@ class PostsList extends Component {
     readablesAPI.getAllPosts()
     .then((posts) => {
       this.props.boundPosts(posts);
-      this.props.posts.forEach((post) => this.loadPostCommentsCount(post));
+      this.props.posts.posts.forEach((post) => this.loadPostCommentsCount(post));
     })
     .catch(function(error) {
       console.log(error);
@@ -170,7 +170,7 @@ class PostsList extends Component {
   }
 
   loadPostsForCategory() {
-    readablesAPI.getPostsForCategory(this.props.category)
+    readablesAPI.getPostsForCategory(this.props.posts.category)
     .then((posts) => {
       this.props.boundPosts(posts);
       this.props.posts.forEach((post) => this.loadPostCommentsCount(post));
@@ -183,7 +183,7 @@ class PostsList extends Component {
   loadPostCommentsCount(post) {
     readablesAPI.getCommentsForPost(post.id)
     .then((comments) => {
-      let newPosts = [...this.props.posts];
+      let newPosts = [...this.props.posts.posts];
       for(let i = 0 ; i < newPosts.length ; ++i){
         if (newPosts[i].id === post.id) {
           newPosts[i].commentsCount = comments.length;
@@ -211,18 +211,18 @@ class PostsList extends Component {
   }
 
   getTitleById(Id){
-    for (let i = 0 ; i < this.props.posts.length ; ++i){
-      if (this.props.posts[i].id === Id){
-        return this.props.posts[i].title;
+    for (let i = 0 ; i < this.props.posts.posts.length ; ++i){
+      if (this.props.posts.posts[i].id === Id){
+        return this.props.posts.posts[i].title;
       }
     }
     return "";
   }
 
   getBodyById(Id){
-    for (let i = 0 ; i < this.props.posts.length ; ++i){
-      if (this.props.posts[i].id === Id){
-        return this.props.posts[i].body;
+    for (let i = 0 ; i < this.props.posts.posts.length ; ++i){
+      if (this.props.posts.posts[i].id === Id){
+        return this.props.posts.posts[i].body;
       }
     }
     return "";
@@ -232,9 +232,9 @@ class PostsList extends Component {
   // How to sort an array based on a string property - taken from the following stack overflow post :
   // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript
   Compare(a,b) {
-    if (a[this.props.postsOrderByValue] < b[this.props.postsOrderByValue])
+    if (a[this.props.posts.postsOrderByValue] < b[this.props.posts.postsOrderByValue])
       return 1;
-    if (a[this.props.postsOrderByValue] > b[this.props.postsOrderByValue])
+    if (a[this.props.posts.postsOrderByValue] > b[this.props.posts.postsOrderByValue])
       return -1;
     return 0;
   }
@@ -261,15 +261,16 @@ class PostsList extends Component {
   }
 
   render() {
+    console.log(JSON.stringify(this.props.posts.posts));
     return (
       <div className="jumbotron">
-        <h2>Posts { this.props.category && `for Category '${this.props.category}'` }</h2>
+        <h2>Posts { this.props.posts.posts.category && `for Category '${this.props.posts.category}'` }</h2>
         <div className="well">
-          <h3>Read ({this.props.posts.filter((post)=>(post.deleted === false)).length} posts)</h3>
+          <h3>Read ({this.props.posts.posts.filter((post)=>(post.deleted === false)).length} posts)</h3>
           <form>
             <FormGroup controlId="selectPostsOrderBy">
               <Select name="selectPostsOrderBy"
-                value={this.props.postsOrderByValue}
+                value={this.props.posts.postsOrderByValue}
                 options={this.postsOrderByOptions}
                 onChange={this.postsOrderByChange}
                 inputProps={{readOnly:true}}
@@ -277,11 +278,11 @@ class PostsList extends Component {
                 openOnFocus={true} />
             </FormGroup>
             <FormGroup controlId="formControlsPostsList">
-              <div>{this.props.posts.filter((post)=>(post.deleted === false)).length === 0 && `No posts to display`}</div>
+              <div>{this.props.posts.posts.filter((post)=>(post.deleted === false)).length === 0 && `No posts to display`}</div>
               <div className="list-ol">
                 <ol>
                   {
-                    this.props.posts.filter((post)=>(post.deleted === false))
+                    this.props.posts.posts.filter((post)=>(post.deleted === false))
                       .sort(this.Compare)
                       .map(this.renderPost)
                   }
@@ -323,10 +324,10 @@ class PostsList extends Component {
           </form>
         </div>
         <PostEditor
-          isOpen={this.props.idForEditPost != null}
+          isOpen={this.props.posts.idForEditPost != null}
           onSubmit={this.onSubmitEditedPost}
-          title={this.getTitleById(this.props.idForEditPost)}
-          body={this.getBodyById(this.props.idForEditPost)}
+          title={this.getTitleById(this.props.posts.idForEditPost)}
+          body={this.getBodyById(this.props.posts.idForEditPost)}
           onClose={this.handleCloseModal} />
       </div>
     );
@@ -337,10 +338,10 @@ class PostsList extends Component {
 let mapStateToProps = state => ({
   posts: state.posts,
   categories: state.categories,
-  newPostCategories : state.newPostCategories,
-  postsOrderByValue: state.postsOrderByValue,
-  categoryForNewPost: state.categoryForNewPost,
-  idForEditPost: state.idForEditPost
+  newPostCategories : state.posts.newPostCategories,
+  postsOrderByValue: state.posts.postsOrderByValue,
+  categoryForNewPost: state.posts.categoryForNewPost,
+  idForEditPost: state.posts.idForEditPost
 })
 
 let mapDispatchToProps = dispatch => ({

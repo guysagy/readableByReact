@@ -263,9 +263,9 @@ class CommentsList extends Component {
 }
 
 let mapStateToProps = state => ({
-  comments: state.comments,
-  commentsOrderByValue: state.commentsOrderByValue,
-  commentToEdit : state.commentToEdit
+  comments: state.comments.comments,
+  commentsOrderByValue: state.comments.commentsOrderByValue,
+  commentToEdit : state.comments.commentToEdit
 })
 
 let mapDispatchToProps = dispatch => ({

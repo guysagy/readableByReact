@@ -1,4 +1,9 @@
+import { combineReducers } from 'redux';
+import categoriesReducer from './Categories.js';
+import postsReducer from './Posts.js';
+import commentsReducer from './Comments.js';
 
+/*
 import {
   STASH_POSTS,
   STASH_CATEGORIES,
@@ -12,6 +17,15 @@ import {
   STASH_POST_DETAILS,
   STASH_POST_DETAILS_EDIT
 } from '../actions'
+*/
+
+export default combineReducers({
+  categories: categoriesReducer,
+  posts: postsReducer,
+  comments: commentsReducer
+});
+
+/*
 
 const initialReadablesState = {
   posts:[],
@@ -74,3 +88,4 @@ let reducer = (state = initialReadablesState, action) => {
 }
 
 export default reducer
+*/

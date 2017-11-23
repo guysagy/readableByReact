@@ -29,10 +29,10 @@ class CategoriesList extends Component {
       <div className="jumbotron">
         <h2>Categories of Posts</h2>
         <div className="list-ol">
-          <div>{this.props.categories.length === 0 && `No categories to display`}</div>
+          <div>{this.props.categories.categories.length === 0 && `No categories to display`}</div>
           <ol>
             {
-              this.props.categories.map((category, index)=>(<li key={category.path}><Link to={`/category/${category.path}`}>{category.name}</Link></li>))
+              this.props.categories.categories.map((category, index)=>(<li key={category.path}><Link to={`/category/${category.path}`}>{category.name}</Link></li>))
             }
           </ol>
         </div>

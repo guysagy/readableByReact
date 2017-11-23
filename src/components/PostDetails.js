@@ -87,6 +87,7 @@ class PostDetails extends Component {
   loadPostDetails() {
     readablesAPI.getDetailsForPost(this.props.match.params.postId)
     .then((postDetails) => {
+      console.log(JSON.stringify(postDetails));
       this.props.boundPostDetails(postDetails);
     })
     .catch(function(error) {
@@ -139,8 +140,8 @@ class PostDetails extends Component {
 }
 
 let mapStateToProps = state => ({
-  postDetails: state.postDetails,
-  postDetailsEdit: state.postDetailsEdit
+  postDetails: state.posts.postDetails,
+  postDetailsEdit: state.posts.postDetailsEdit
 })
 
 let mapDispatchToProps = dispatch => ({

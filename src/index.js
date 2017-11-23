@@ -5,16 +5,17 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import App from './components/App'
 import registerServiceWorker from './registerServiceWorker'
-import reducer from './reducers'
+import combineReducers from './reducers'
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/bootstrap-theme.css'
 
 let store = createStore(
-    reducer,
+    combineReducers,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
+console.log(store.getState()) // { users: {}, books: {} }
 
 ReactDOM.render(
   <Provider store={store}>
