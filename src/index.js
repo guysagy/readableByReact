@@ -1,21 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter } from 'react-router-dom'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux'
 import App from './components/App'
 import registerServiceWorker from './registerServiceWorker'
-import combineReducers from './reducers'
+import rootReducer from './reducers'
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/bootstrap-theme.css'
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 let store = createStore(
-    combineReducers,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
-
-console.log(store.getState()) // { users: {}, books: {} }
+    rootReducer,
+    composeEnhancers(applyMiddleware())
+);
 
 ReactDOM.render(
   <Provider store={store}>
