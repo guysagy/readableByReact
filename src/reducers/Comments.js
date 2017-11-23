@@ -10,23 +10,23 @@ const initialCommentsState = {
   editComment: null
 }
 
-let commentsReducer = (state = initialCommentsState, action) => {
+let commentsReducer = (commentsCache = initialCommentsState, action) => {
 
   switch (action.type) {
 
     case STASH_COMMENTS :
-      return { ...state, comments : action.comments };
+      return { ...commentsCache, comments : action.comments };
 
     case STASH_COMMENTS_ORDER_BY_VALUE :
-      return { ...state, commentsOrderByValue : action.commentsOrderByValue };
+      return { ...commentsCache, commentsOrderByValue : action.commentsOrderByValue };
 
     case STASH_COMMENT_TO_EDIT :
-      return { ...state, commentToEdit : action.commentToEdit };
+      return { ...commentsCache, commentToEdit : action.commentToEdit };
 
     default :
-      return state;
+      return commentsCache;
   }
 
-}
+};
 
 export default commentsReducer;

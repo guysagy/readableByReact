@@ -7,17 +7,17 @@ const initialCategoriesState = {
   categories:[]
 }
 
-let categoriesReducer = (state = initialCategoriesState, action) => {
+let categoriesReducer = (categoriesCache = initialCategoriesState, action) => {
 
   switch (action.type) {
 
     case STASH_CATEGORIES :
-      return { categories : action.categories };
+      return { ...categoriesCache, categories : action.categories };
 
     default :
-      return state;
+      return categoriesCache;
   }
 
-}
+};
 
 export default categoriesReducer;
