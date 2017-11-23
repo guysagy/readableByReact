@@ -140,8 +140,8 @@ class PostDetails extends Component {
 }
 
 let mapStateToProps = state => ({
-  postDetails: state.posts.postDetails,
-  postDetailsEdit: state.posts.postDetailsEdit
+  postDetails: state.postsCache.postDetails,
+  postDetailsEdit: state.postsCache.postDetailsEdit
 })
 
 let mapDispatchToProps = dispatch => ({

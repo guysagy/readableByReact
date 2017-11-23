@@ -17,4 +17,4 @@ class CategoryDetails extends Component {
 
 }
 
-export default CategoryDetails
+export default CategoryDetails;

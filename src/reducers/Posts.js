@@ -31,7 +31,6 @@ let postsReducer = (state = initialPostsState, action) => {
 
   switch (action.type) {
 
-    // Posts reducer.
     case STASH_POSTS :
       return { ...state, posts : action.posts };
 
@@ -59,4 +58,4 @@ let postsReducer = (state = initialPostsState, action) => {
 
 }
 
-export default postsReducer
+export default postsReducer;
