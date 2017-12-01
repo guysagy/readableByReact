@@ -51,3 +51,4 @@ let postsReducer = (postsCache = initialPostsState, action) => {
 };
 
 export default postsReducer;
+

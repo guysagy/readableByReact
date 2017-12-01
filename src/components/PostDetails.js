@@ -151,4 +151,4 @@ let mapDispatchToProps = dispatch => ({
 
 let PostDetailsWithRedux = connect(mapStateToProps, mapDispatchToProps)(PostDetails);
 
-export default PostDetailsWithRedux
+export default PostDetailsWithRedux;

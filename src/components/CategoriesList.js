@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { stashCategories } from '../actions'
+import { stashCategories , loadCategoriesAsync} from '../actions'
 import * as readablesAPI from '../readablesAPI'
 
 /*
@@ -11,17 +11,7 @@ CategoriesListWithRedux component implementation.
 class CategoriesList extends Component {
 
   componentDidMount() {
-    this.loadCategories();
-  }
-
-  loadCategories() {
-    readablesAPI.getAllCategories()
-    .then((categories) => {
-      this.props.boundCategories(categories);
-    })
-    .catch(function(error) {
-      console.log("error: " + error);
-    });
+    loadCategoriesAsync();
   }
 
   render() {
@@ -53,3 +43,4 @@ let mapDispatchToProps = dispatch => ({
 let CategoriesListWithRedux = connect(mapStateToProps, mapDispatchToProps)(CategoriesList);
 
 export default CategoriesListWithRedux;
+

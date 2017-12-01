@@ -21,3 +21,4 @@ let categoriesReducer = (categoriesCache = initialCategoriesState, action) => {
 };
 
 export default categoriesReducer;
+

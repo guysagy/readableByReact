@@ -276,4 +276,5 @@ let mapDispatchToProps = dispatch => ({
 
 let CommentsListWithRedux = connect(mapStateToProps, mapDispatchToProps)(CommentsList);
 
-export default CommentsListWithRedux
+export default CommentsListWithRedux;
+

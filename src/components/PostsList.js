@@ -9,7 +9,7 @@ import serializeForm from 'form-serialize'
 import * as readablesAPI from '../readablesAPI'
 import ReadableControls from './ReadableControls'
 import PostEditor from './PostEditor'
-import { stashIdForEditPost, stashCategoryForNewPost, stashPostsOrderByValue, stashNewPostCategories, stashCategories, stashPosts } from '../actions'
+import { loadPostCommentsCountAsync, stashIdForEditPost, stashCategoryForNewPost, stashPostsOrderByValue, stashNewPostCategories, stashCategories, stashPosts } from '../actions'
 
 /*
 PostsListWithRedux component implementation.
@@ -83,7 +83,7 @@ class PostsList extends Component {
         }
         this.props.boundPosts(posts);
         this.props.boundIdForEditPost(null);
-        this.loadPostCommentsCount(result);
+        this.loadPostCommentsCountAsync(result);
       });
     }
   }
@@ -162,7 +162,7 @@ class PostsList extends Component {
     readablesAPI.getAllPosts()
     .then((posts) => {
       this.props.boundPosts(posts);
-      this.props.posts.forEach((post) => this.loadPostCommentsCount(post));
+      this.props.posts.forEach((post) => loadPostCommentsCountAsync(post));
     })
     .catch(function(error) {
       console.log(error);
@@ -173,24 +173,7 @@ class PostsList extends Component {
     readablesAPI.getPostsForCategory(this.props.category)
     .then((posts) => {
       this.props.boundPosts(posts);
-      this.props.posts.forEach((post) => this.loadPostCommentsCount(post));
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-  }
-
-  loadPostCommentsCount(post) {
-    readablesAPI.getCommentsForPost(post.id)
-    .then((comments) => {
-      let newPosts = [...this.props.posts];
-      for(let i = 0 ; i < newPosts.length ; ++i){
-        if (newPosts[i].id === post.id) {
-          newPosts[i].commentsCount = comments.length;
-          break;
-        }
-      }
-      this.props.boundPosts(newPosts);
+      this.props.posts.forEach((post) => loadPostCommentsCountAsync(post));
     })
     .catch(function(error) {
       console.log(error);
@@ -356,3 +339,4 @@ let mapDispatchToProps = dispatch => ({
 let PostsListWithRedux = connect(mapStateToProps, mapDispatchToProps)(PostsList);
 
 export default PostsListWithRedux;
+

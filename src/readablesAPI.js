@@ -79,12 +79,12 @@ export const downVoteComment = (commentId) =>
 export const addPost = (id, timestamp, title, body, author, category) => 
   fetch(`${api}/posts`,
     { 
-      method: 'POST', 
+      method: 'POST',
       headers: {...headers, 'Content-Type': 'application/json'}, 
       body: JSON.stringify({id:id, timestamp:timestamp, title:title, body:body, author:author, category:category}) 
     })
     .then(handleErrors)
-    .then(res => res.json())    
+    .then(res => res.json())
 
 export const addComment = (id, timestamp, body, author, parentId) => 
   fetch(`${api}/comments`,
@@ -94,7 +94,7 @@ export const addComment = (id, timestamp, body, author, parentId) =>
       body: JSON.stringify({id:id, timestamp:timestamp, body:body, author:author, parentId:parentId}) 
     })
     .then(handleErrors)
-    .then(res => res.json())   
+    .then(res => res.json())
 
 export const updatePost = (postId, title, body) => 
   fetch(`${api}/posts/${postId}`,
@@ -104,7 +104,7 @@ export const updatePost = (postId, title, body) =>
       body: JSON.stringify({title, body}) 
     })
     .then(handleErrors)
-    .then(res => res.json())     
+    .then(res => res.json())
 
 export const updateComment = (commentId, timestamp, body) => 
   fetch(`${api}/comments/${commentId}`,
@@ -114,4 +114,4 @@ export const updateComment = (commentId, timestamp, body) =>
       body: JSON.stringify({timestamp, body}) 
     })
     .then(handleErrors)
-    .then(res => res.json())       
+    .then(res => res.json())

@@ -1,3 +1,5 @@
+import * as readablesAPI from '../readablesAPI'
+
 export const STASH_POSTS = 'STASH_POSTS'
 export const STASH_CATEGORIES = 'STASH_CATEGORIES'
 export const STASH_NEW_POST_CATEGORIES = 'STASH_NEW_POST_CATEGORIES'
@@ -89,4 +91,35 @@ export function stashPostDetailsEdit (postDetailsEdit) {
     type: STASH_POST_DETAILS_EDIT,
     postDetailsEdit: postDetailsEdit
   };
+}
+
+export function loadCategoriesAsync () {
+  return function(dispatch){
+    readablesAPI.getAllCategories()
+    .then((categories) => {
+      dispatch(stashCategories(categories));
+    })
+    .catch(function(error) {
+      console.log("error: " + error);
+    });
+  }
+}
+
+export function loadPostCommentsCountAsync (post) {
+  return function(dispatch) {
+    readablesAPI.getCommentsForPost(post.id)
+    .then((comments) => {
+      let newPosts = [...this.props.posts];
+      for(let i = 0 ; i < newPosts.length ; ++i){
+        if (newPosts[i].id === post.id) {
+          newPosts[i].commentsCount = comments.length;
+          break;
+        }
+      }
+      dispatch(stashPosts(newPosts));
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+  }
 }
