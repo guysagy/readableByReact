@@ -83,7 +83,7 @@ class PostsList extends Component {
         }
         this.props.boundPosts(posts);
         this.props.boundIdForEditPost(null);
-        this.loadPostCommentsCountAsync(result);
+        this.props.dispatch(loadPostCommentsCountAsync(result));
       });
     }
   }
@@ -162,7 +162,7 @@ class PostsList extends Component {
     readablesAPI.getAllPosts()
     .then((posts) => {
       this.props.boundPosts(posts);
-      this.props.posts.forEach((post) => loadPostCommentsCountAsync(post));
+      this.props.posts.forEach((post) => this.props.dispatch(loadPostCommentsCountAsync(post)));
     })
     .catch(function(error) {
       console.log(error);
@@ -173,7 +173,7 @@ class PostsList extends Component {
     readablesAPI.getPostsForCategory(this.props.category)
     .then((posts) => {
       this.props.boundPosts(posts);
-      this.props.posts.forEach((post) => loadPostCommentsCountAsync(post));
+      this.props.posts.forEach((post) => this.props.dispatch(loadPostCommentsCountAsync(post)));
     })
     .catch(function(error) {
       console.log(error);

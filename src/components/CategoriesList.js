@@ -11,7 +11,7 @@ CategoriesListWithRedux component implementation.
 class CategoriesList extends Component {
 
   componentDidMount() {
-    loadCategoriesAsync();
+    this.props.boundCategories();
   }
 
   render() {
@@ -37,7 +37,7 @@ let mapStateToProps = state => ({
 })
 
 let mapDispatchToProps = dispatch => ({
-  boundCategories: (categories) => dispatch(stashCategories(categories))
+  boundCategories: () => {dispatch(loadCategoriesAsync())}
 })
 
 let CategoriesListWithRedux = connect(mapStateToProps, mapDispatchToProps)(CategoriesList);
