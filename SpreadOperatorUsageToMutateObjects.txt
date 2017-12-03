@@ -1,0 +1,88 @@
+When you normalize a store, you are flattening the hierarchy.
+
+The prior code sample shows how a harry potter book is stored in a sample redux store.
+
+```
+const books = {
+  fiction: {
+    fantasy: {
+      teens: {
+        0: {
+          title: 'Harry Potter and the Nested Data',
+          author: 'JK Rowling',
+        }
+      },
+      adults: {}
+    },
+    romance: {},
+    scifi: {},
+  },
+  nonFiction: {}
+}
+
+```
+
+
+This is not how we want to structure our store, because it has too many levels -- which creates reducers that are hard to follow and computationally expensive
+
+To walk through it and understand it a bit better :
+
+in our reducer, we are destructuring
+
+const { bookType, genre, category, id, title } = action
+
+so,
+
+bookType = fiction
+genre =  fantasy
+category = teens
+id = 0
+title = Harry Potter and the Nested Title
+
+What's happening at each of those spread operators is the state object is being copied in full, except for the part that is now being mutated. Since this is an object, we can access the values inside by using object key notation, i.e.
+
+state[fiction] would return the fiction object inside the books object, i.e.
+
+``` fantasy: {
+      teens: {
+        0: {
+          title: 'Harry Potter and the Nested Data',
+          author: 'JK Rowling',
+        }
+      },
+      adults: {}
+    },
+    romance: {},
+    scifi: {},
+```
+
+
+so when we call :
+
+``` ...state,
+      [bookType]
+```
+
+
+bookType is fiction, so this means we are copying the nonfiction object, and mutating the fiction object
+
+We're now one level down, and we do the same thing for
+
+```...state[bookType],
+        [genre]"
+```
+
+
+state[bookType] is the fiction object, so we are creating a copy of the fiction object and keeping all of it the same (i.e. we are copying romance: {}, scifi: {}) but we are going to mutate the fantasy object, i.e.
+
+``` teens: {
+        0: {
+          title: 'Harry Potter and the Nested Data',
+          author: 'JK Rowling',
+        }
+      },
+      adults: {}
+```
+
+
+the next line is done incorrectly I think (it should spread the category object)...  but this should illustrate the issue with having too many levels in your redux store hierarchy! (edited)
