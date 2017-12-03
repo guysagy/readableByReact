@@ -7,8 +7,8 @@ import uuidv1 from 'uuid/v1'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 import ReadableControls from './ReadableControls'
-import * as readablesAPI from './readablesAPI'
-import { stashComments, stashCommentsOrderByValue, stashCommentToEdit } from './actions'
+import * as readablesAPI from '../readablesAPI'
+import { stashComments, stashCommentsOrderByValue, stashCommentToEdit } from '../actions'
 
 /*
 CommentsListWithRedux component implementation.
@@ -263,9 +263,9 @@ class CommentsList extends Component {
 }
 
 let mapStateToProps = state => ({
-  comments: state.comments,
-  commentsOrderByValue: state.commentsOrderByValue,
-  commentToEdit : state.commentToEdit
+  comments: state.commentsCache.comments,
+  commentsOrderByValue: state.commentsCache.commentsOrderByValue,
+  commentToEdit : state.commentsCache.commentToEdit
 })
 
 let mapDispatchToProps = dispatch => ({
@@ -276,4 +276,5 @@ let mapDispatchToProps = dispatch => ({
 
 let CommentsListWithRedux = connect(mapStateToProps, mapDispatchToProps)(CommentsList);
 
-export default CommentsListWithRedux
+export default CommentsListWithRedux;
+

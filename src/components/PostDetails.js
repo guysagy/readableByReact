@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { FormGroup } from 'react-bootstrap'
 import serializeForm from 'form-serialize'
-import * as readablesAPI from './readablesAPI'
+import * as readablesAPI from '../readablesAPI'
 import CommentsListWithRedux from './CommentsList'
 import PostEditor from './PostEditor'
 import ReadableControls from './ReadableControls'
-import { stashPostDetails, stashPostDetailsEdit } from './actions'
+import { stashPostDetails, stashPostDetailsEdit } from '../actions'
 
 /*
 PostDetailsWithRedux component implementation.
@@ -87,6 +87,7 @@ class PostDetails extends Component {
   loadPostDetails() {
     readablesAPI.getDetailsForPost(this.props.match.params.postId)
     .then((postDetails) => {
+      console.log(JSON.stringify(postDetails));
       this.props.boundPostDetails(postDetails);
     })
     .catch(function(error) {
@@ -139,8 +140,8 @@ class PostDetails extends Component {
 }
 
 let mapStateToProps = state => ({
-  postDetails: state.postDetails,
-  postDetailsEdit: state.postDetailsEdit
+  postDetails: state.postsCache.postDetails,
+  postDetailsEdit: state.postsCache.postDetailsEdit
 })
 
 let mapDispatchToProps = dispatch => ({
@@ -150,4 +151,4 @@ let mapDispatchToProps = dispatch => ({
 
 let PostDetailsWithRedux = connect(mapStateToProps, mapDispatchToProps)(PostDetails);
 
-export default PostDetailsWithRedux
+export default PostDetailsWithRedux;

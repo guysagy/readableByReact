@@ -48,4 +48,4 @@ class ReadableControls extends Component {
 
 }
 
-export default ReadableControls
+export default ReadableControls;

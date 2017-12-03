@@ -6,10 +6,10 @@ import uuidv1 from 'uuid/v1'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 import serializeForm from 'form-serialize'
-import * as readablesAPI from './readablesAPI'
+import * as readablesAPI from '../readablesAPI'
 import ReadableControls from './ReadableControls'
 import PostEditor from './PostEditor'
-import { stashIdForEditPost, stashCategoryForNewPost, stashPostsOrderByValue, stashNewPostCategories, stashCategories, stashPosts } from './actions'
+import { loadPostCommentsCountAsync, stashIdForEditPost, stashCategoryForNewPost, stashPostsOrderByValue, stashNewPostCategories, stashCategories, stashPosts } from '../actions'
 
 /*
 PostsListWithRedux component implementation.
@@ -83,7 +83,7 @@ class PostsList extends Component {
         }
         this.props.boundPosts(posts);
         this.props.boundIdForEditPost(null);
-        this.loadPostCommentsCount(result);
+        this.props.dispatch(loadPostCommentsCountAsync(result));
       });
     }
   }
@@ -162,7 +162,7 @@ class PostsList extends Component {
     readablesAPI.getAllPosts()
     .then((posts) => {
       this.props.boundPosts(posts);
-      this.props.posts.forEach((post) => this.loadPostCommentsCount(post));
+      this.props.posts.forEach((post) => this.props.dispatch(loadPostCommentsCountAsync(post)));
     })
     .catch(function(error) {
       console.log(error);
@@ -173,24 +173,7 @@ class PostsList extends Component {
     readablesAPI.getPostsForCategory(this.props.category)
     .then((posts) => {
       this.props.boundPosts(posts);
-      this.props.posts.forEach((post) => this.loadPostCommentsCount(post));
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-  }
-
-  loadPostCommentsCount(post) {
-    readablesAPI.getCommentsForPost(post.id)
-    .then((comments) => {
-      let newPosts = [...this.props.posts];
-      for(let i = 0 ; i < newPosts.length ; ++i){
-        if (newPosts[i].id === post.id) {
-          newPosts[i].commentsCount = comments.length;
-          break;
-        }
-      }
-      this.props.boundPosts(newPosts);
+      this.props.posts.forEach((post) => this.props.dispatch(loadPostCommentsCountAsync(post)));
     })
     .catch(function(error) {
       console.log(error);
@@ -261,6 +244,7 @@ class PostsList extends Component {
   }
 
   render() {
+    console.log(JSON.stringify(this.props));
     return (
       <div className="jumbotron">
         <h2>Posts { this.props.category && `for Category '${this.props.category}'` }</h2>
@@ -335,12 +319,12 @@ class PostsList extends Component {
 }
 
 let mapStateToProps = state => ({
-  posts: state.posts,
-  categories: state.categories,
-  newPostCategories : state.newPostCategories,
-  postsOrderByValue: state.postsOrderByValue,
-  categoryForNewPost: state.categoryForNewPost,
-  idForEditPost: state.idForEditPost
+  posts: state.postsCache.posts,
+  categories: state.categoriesCache.categories,
+  newPostCategories : state.postsCache.newPostCategories,
+  postsOrderByValue: state.postsCache.postsOrderByValue,
+  categoryForNewPost: state.postsCache.categoryForNewPost,
+  idForEditPost: state.postsCache.idForEditPost
 })
 
 let mapDispatchToProps = dispatch => ({
@@ -354,4 +338,5 @@ let mapDispatchToProps = dispatch => ({
 
 let PostsListWithRedux = connect(mapStateToProps, mapDispatchToProps)(PostsList);
 
-export default PostsListWithRedux
+export default PostsListWithRedux;
+

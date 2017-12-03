@@ -54,4 +54,4 @@ class PostEditor extends Component {
 
 }
 
-export default PostEditor
+export default PostEditor;
