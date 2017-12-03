@@ -36,7 +36,7 @@ Posts page displays a list of all available Posts' titles and Posts' metadata, l
 ### Posts Details Page
 Post details page shows full information for a selected post - post metadata, post comments, and a form to create a new comment for the currently selected post.
 
-## Todo:
+## Todo
 (i) Add to 'Categories' the add/delete functionalities. 
 
 ## Known bugs
