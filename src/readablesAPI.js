@@ -1,5 +1,5 @@
 
-const api = "https://posts-server.herokuapp.com:5001"
+const api = "https://posts-server.herokuapp.com"
 
 // handleErrors utility function as suggested by the following blog post:
 // https://www.tjvantoll.com/2015/09/13/fetch-and-errors/
