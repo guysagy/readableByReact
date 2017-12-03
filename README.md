@@ -28,13 +28,16 @@ The application's user interface includes a top menu menu bar with the following
 Home page displays the Categories page and Posts page in one page.
 
 ### Categories Page
-Categories are the subects to which posts relate. The Categories page displays a list of all available Post's Categories. Each category display item is a link to show all Posts that relate to that category.
+Categories are the subects to which posts relate. The Categories page displays a list of all available Post's Categories. Each category display item is a link to show all Posts that relate to that category. Categories are hard-coded and non-editable.
 
 ### Posts Page
 Posts page displays a list of all available Posts' titles and Posts' metadata, linked to a Post's Details page, and a form to create a new post.
 
 ### Posts Details Page
 Post details page shows full information for a selected post - post metadata, post comments, and a form to create a new comment for the currently selected post.
+
+## TODO items:
+(i) Add to 'Categories' the add/delete functionalities. 
 
 ## Known bugs:
 (i) Forms' input validations are missing. <br/>
