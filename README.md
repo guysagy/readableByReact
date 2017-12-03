@@ -9,12 +9,12 @@ Submitted by Guy Sagy (guysagy@hotamil.com), September 2017. <br/>
 ## WebApp Installation & Launch Guide
 (1) As a pre-condition to run this application on a server machine, [Node.js](https://nodejs.org/) must be installed. Please install [Node.js](https://nodejs.org/) if it is not yet installed.
 
-(2.a) Check out the [Readable REST API server](https://github.com/udacity/reactnd-project-readable-starter). <br/>
+(2.a) Check out the [Readable REST API service-side code](https://github.com/udacity/reactnd-project-readable-starter). Supplied by Udacity course instructors. <br/>
 (2.b) In a command prompt change directory into the &lt;project-checkout-dir&gt;/api-server dir. <br/>
 (2.c) Run the command "npm install". This will install project dependencies. <br/>
 (2.d) Run the command "node server". This will run the REST API HTTP server. <br/>
 
-(3.a) Check out the [Readable web-app client-side code](https://github.com/guysagy/readableByReact). <br/>
+(3.a) Check out the [Readable web-app client-side code](https://github.com/guysagy/readableByReact). This is my project's solution. <br/>
 (3.b) In a command prompt, change directory into the project's check out directory. <br/>
 (3.c) Run the command "npm install". This will install project dependencies. <br/>
 (3.d) Run the command "npm start". This will run the client-app HTTP server. <br/>
@@ -31,17 +31,17 @@ Home page displays the Categories page and Posts page in one page.
 Categories are the subects to which posts relate. The Categories page displays a list of all available Post's Categories. Each category display item is a link to show all Posts that relate to that category.
 
 ### Posts Page
-Posts page displays a list of all available Posts' title and Posts' metadata, linked to the Post's Details page, and a form to create a new post.
+Posts page displays a list of all available Posts' titles and Posts' metadata, linked to a Post's Details page, and a form to create a new post.
 
 ### Posts Details Page
-Post details page shows full information for the post, including available comments to the post, and a form to create a new comment to this post.
+Post details page shows full information for a selected post - post metadata, post comments, and a form to create a new comment for the currently selected post.
 
 ## Known bugs:
 (i) Forms' input validations are missing. <br/>
 (ii) Efficiency issue: Both Posts and Category pages load categories from server, independently. <br/>
 (iii) Efficiency issue: 'Posts for Category' loads relevant posts from server, while it could simply filter posts from the complete list of posts. <br/>
 
-## Resources - technical articles referenced while implementing this project:
+## Resources - a few technical articles referenced while implementing this project:
 (i) [React-Boostrap](https://react-bootstrap.github.io/components.html#forms)<br/>
 (ii) [Passing values in route (1)](https://stackoverflow.com/questions/27864720/react-router-pass-props-to-handler-component)<br/>
 (iii) [Passing values in route (2)](https://jaketrent.com/post/access-route-params-react-router-v4/)<br/>
