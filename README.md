@@ -36,15 +36,15 @@ Posts page displays a list of all available Posts' titles and Posts' metadata, l
 ### Posts Details Page
 Post details page shows full information for a selected post - post metadata, post comments, and a form to create a new comment for the currently selected post.
 
-## TODO items:
+## Todo:
 (i) Add to 'Categories' the add/delete functionalities. 
 
-## Known bugs:
+## Known bugs
 (i) Forms' input validations are missing. <br/>
 (ii) Efficiency issue: Both Posts and Category pages load categories from server, independently. <br/>
 (iii) Efficiency issue: 'Posts for Category' loads relevant posts from server, while it could simply filter posts from the complete list of posts. <br/>
 
-## Resources - a few technical articles referenced while implementing this project:
+## Resources - a few technical articles referenced while implementing this project
 (i) [React-Boostrap](https://react-bootstrap.github.io/components.html#forms)<br/>
 (ii) [Passing values in route (1)](https://stackoverflow.com/questions/27864720/react-router-pass-props-to-handler-component)<br/>
 (iii) [Passing values in route (2)](https://jaketrent.com/post/access-route-params-react-router-v4/)<br/>
