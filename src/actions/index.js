@@ -105,11 +105,11 @@ export function loadCategoriesAsync () {
   }
 }
 
-export function loadPostCommentsCountAsync (post) {
+export function loadPostCommentsCountAsync (post, posts) {
   return function(dispatch) {
     readablesAPI.getCommentsForPost(post.id)
     .then((comments) => {
-      let newPosts = [...this.props.posts];
+      let newPosts = [...posts];
       for(let i = 0 ; i < newPosts.length ; ++i){
         if (newPosts[i].id === post.id) {
           newPosts[i].commentsCount = comments.length;

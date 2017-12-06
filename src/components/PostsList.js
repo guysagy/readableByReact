@@ -83,7 +83,7 @@ class PostsList extends Component {
         }
         this.props.boundPosts(posts);
         this.props.boundIdForEditPost(null);
-        this.props.dispatch(loadPostCommentsCountAsync(result));
+        this.props.boundCommentsCountForPost(result, posts);
       });
     }
   }
@@ -162,7 +162,7 @@ class PostsList extends Component {
     readablesAPI.getAllPosts()
     .then((posts) => {
       this.props.boundPosts(posts);
-      this.props.posts.forEach((post) => this.props.dispatch(loadPostCommentsCountAsync(post)));
+      posts.forEach((post) => this.props.boundCommentsCountForPost(post, posts));
     })
     .catch(function(error) {
       console.log(error);
@@ -173,7 +173,7 @@ class PostsList extends Component {
     readablesAPI.getPostsForCategory(this.props.category)
     .then((posts) => {
       this.props.boundPosts(posts);
-      this.props.posts.forEach((post) => this.props.dispatch(loadPostCommentsCountAsync(post)));
+      posts.forEach((post) => this.props.boundCommentsCountForPost(post, posts));
     })
     .catch(function(error) {
       console.log(error);
@@ -333,10 +333,10 @@ let mapDispatchToProps = dispatch => ({
   boundNewPostCategories: (newPostCategories) => dispatch(stashNewPostCategories(newPostCategories)),
   boundPostsOrderByValue: (postsOrderByValue) => dispatch(stashPostsOrderByValue(postsOrderByValue)),
   boundCategoryForNewPost: (categoryForNewPost) => dispatch(stashCategoryForNewPost(categoryForNewPost)),
-  boundIdForEditPost: (idForEditPost) => dispatch(stashIdForEditPost(idForEditPost))
+  boundIdForEditPost: (idForEditPost) => dispatch(stashIdForEditPost(idForEditPost)),
+  boundCommentsCountForPost: (post, posts) => dispatch(loadPostCommentsCountAsync(post, posts))
 })
 
 let PostsListWithRedux = connect(mapStateToProps, mapDispatchToProps)(PostsList);
 
 export default PostsListWithRedux;
-
