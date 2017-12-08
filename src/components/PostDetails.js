@@ -88,6 +88,8 @@ class PostDetails extends Component {
     readablesAPI.getDetailsForPost(this.props.match.params.postId)
     .then((postDetails) => {
       console.log(JSON.stringify(postDetails));
+      if (postDetails.id === undefined)
+        postDetails.id = null;
       this.props.boundPostDetails(postDetails);
     })
     .catch(function(error) {
@@ -130,7 +132,7 @@ class PostDetails extends Component {
     return (
       <div>
          <div className="jumbotron">
-          <h2>{this.props.postDetails.id === undefined && `The requested post does not exist or has been deleted and is no longer viewable!`}</h2>
+          <h2>{this.props.postDetails.id === null && `The requested post does not exist or has been deleted and is no longer viewable!`}</h2>
           {this.props.postDetails.id && this.renderPostDetails()}
         </div>
       </div>
